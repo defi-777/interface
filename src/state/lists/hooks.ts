@@ -1,6 +1,8 @@
+import { useState } from 'react'
 import { ChainId, Token } from '@uniswap/sdk'
 import { Tags, TokenInfo, TokenList } from '@uniswap/token-lists'
 import { useMemo } from 'react'
+import getTokenList from '../../utils/getTokenList'
 
 type TagDetails = Tags[keyof Tags]
 export interface TagInfo extends TagDetails {
@@ -69,17 +71,21 @@ export function listToTokenMap(list: TokenList): TokenAddressMap {
 }
 
 export function useTokenList(url: string | undefined): TokenAddressMap {
+  const [tokenList, setTokenList] = useState<TokenList | null>(null);
   return useMemo(() => {
     if (!url) return EMPTY_LIST
-    const current = null//lists[url]?.current
-    if (!current) return EMPTY_LIST
+    if (!tokenList) {
+      getTokenList(url).then(setTokenList)
+
+      return EMPTY_LIST
+    }
     try {
-      return listToTokenMap(current)
+      return listToTokenMap(tokenList)
     } catch (error) {
       console.error('Could not show token list due to error', error)
       return EMPTY_LIST
     }
-  }, [url])
+  }, [url, tokenList])
 }
 
 export function useSelectedListUrl(): string | undefined {

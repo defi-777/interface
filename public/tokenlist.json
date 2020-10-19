@@ -1,30 +1,60 @@
 {
   "name": "DeFi777",
-  "logoURI": "https://umaproject.org/assets/images/UMA_square_red_logo_circle.png",
-  "keywords": ["defi", "erc777"],
-  "timestamp": "2020-08-25T01:40:34.305Z",
+  "logoURI": "https://raw.githubusercontent.com/Synthetixio/synthetix-assets/v2.0.3/snx/SNX.svg",
+  "keywords": [
+    "defi",
+    "defi777",
+    "wrapper"
+  ],
+  "timestamp": "2020-10-08T09:44:03.362Z",
+  "tags": {
+    "erc777": {
+      "name": "ERC777",
+      "description": "Token that implements the ERC777 standard."
+    },
+    "erc20": {
+      "name": "ERC20",
+      "description": "Token that implements the ERC20 standard and does not implement the ERC777 standard."
+    },
+    "uni": {
+      "name": "Uniswap LP Token",
+      "description": "Liquidity Provider token for Uniswap V2."
+    },
+    "uni777": {
+      "name": "Uniswap LP Wrapper",
+      "description": "DeFi777 wrapper on a Uniswap LP token."
+    },
+    "farmer": {
+      "name": "Farmer token",
+      "description": "A wrapper token that farms other tokens."
+    }
+  },
+  "version": {
+    "major": 0,
+    "minor": 0,
+    "patch": 0
+  },
   "tokens": [
     {
       "chainId": 1,
-      "address": "0x04fa0d235c4abf4bcf4787af4cf447de572ef828",
-      "name": "UMA",
-      "symbol": "UMA",
-      "decimals": 18
+      "address": "0xC011a73ee8576Fb46F5E1c5751cA3B9Fe0af2a6F",
+      "symbol": "SNX",
+      "name": "Synthetix Network Token",
+      "decimals": 18,
+      "logoURI": "https://raw.githubusercontent.com/Synthetixio/synthetix-assets/v2.0.3/snx/SNX.svg",
+      "tags": []
     },
     {
       "chainId": 1,
-      "address": "0x81ab848898b5ffD3354dbbEfb333D5D183eEDcB5",
-      "name": "yUSD Synthetic Expiring 1 September 2020",
-      "symbol": "yUSDSEP20",
-      "decimals": 18
-    },
-    {
-      "chainId": 1,
-      "address": "0xB2FdD60AD80ca7bA89B9BAb3b5336c2601C020b4",
-      "name": "yUSD Synthetic Expiring 1 October 2020",
-      "symbol": "yUSDOCT20",
-      "decimals": 18
+      "address": "0x8A8079c7149B8A1611e5C5d978DCA3bE16545F83",
+      "symbol": "iADA",
+      "name": "Synth Inverse Cardano",
+      "decimals": 18,
+      "logoURI": "https://raw.githubusercontent.com/Synthetixio/synthetix-assets/v2.0.3/synths/iADA.svg",
+      "tags": [
+        "inverse",
+        "synth"
+      ]
     }
-  ],
-  "version": { "major": 0, "minor": 0, "patch": 0 }
+  ]
 }

@@ -43,6 +43,7 @@ import { computeTradePriceBreakdown, warningSeverity } from '../../utils/prices'
 import AppBody from '../AppBody'
 import { ClickableText } from '../Pool/styleds'
 import Loader from '../../components/Loader'
+import AssetList from '../../components/AssetList'
 
 export default function Swap() {
   const loadedUrlParams = useDefaultsFromURLSearch()
@@ -372,6 +373,7 @@ export default function Swap() {
                 </AutoColumn>
               </Card>
             )}
+            <AssetList />
           </AutoColumn>
           <BottomGrouping>
             {!account ? (
