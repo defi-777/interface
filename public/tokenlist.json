@@ -38,11 +38,22 @@
     {
       "chainId": 1,
       "address": "0xC011a73ee8576Fb46F5E1c5751cA3B9Fe0af2a6F",
-      "symbol": "SNX",
-      "name": "Synthetix Network Token",
+      "symbol": "SNX77",
+      "name": "Synthetix Network Token-777",
       "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/Synthetixio/synthetix-assets/v2.0.3/snx/SNX.svg",
       "tags": []
+    },
+    {
+      "chainId": 1,
+      "address": "0x8dAEBADE922dF735c38C80C7eBD708Af50815fAa",
+      "symbol": "Dai777",
+      "name": "Dai-777",
+      "decimals": 18,
+      "logoURI": "https://raw.githubusercontent.com/Synthetixio/synthetix-assets/v2.0.3/snx/SNX.svg",
+      "tags": [
+        "erc777"
+      ]
     },
     {
       "chainId": 1,

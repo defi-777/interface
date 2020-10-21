@@ -7,16 +7,15 @@ function currencyKey(currency: Currency): string {
   return currency instanceof Token ? currency.address : currency === ETHER ? 'ETHER' : ''
 }
 
-export default function AssetList() {
+export default function AssetList({ getLink }: { getLink: (currency: Currency) => string }) {
   const allTokens = useAllTokens()
   const tokens = [Currency.ETHER, ...Object.values(allTokens)]
 
   return (
     <div>
-      {tokens.map(token => {
-        const handleSelect = () => null
-        return <AssetRow key={currencyKey(token)} currency={token} onSelect={handleSelect} />
-      })}
+      {tokens.map(token => (
+        <AssetRow key={currencyKey(token)} currency={token} getLink={getLink} />
+      ))}
     </div>
   )
 }

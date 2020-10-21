@@ -1,7 +1,8 @@
 import React from 'react'
-import { Currency, CurrencyAmount, ETHER, Token } from '@uniswap/sdk'
+import { Currency, CurrencyAmount, Token } from '@uniswap/sdk'
 import { Text } from 'rebass'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 import { useActiveWeb3React } from '../../hooks'
 import { useSelectedTokenList } from '../../state/lists/hooks'
 import { useAddUserToken, useRemoveUserAddedToken } from '../../state/user/hooks'
@@ -15,10 +16,6 @@ import { FadedSpan, MenuItem } from '../SearchModal/styleds'
 import Loader from '../Loader'
 import { isTokenOnList } from '../../utils'
 
-function currencyKey(currency: Currency): string {
-  return currency instanceof Token ? currency.address : currency === ETHER ? 'ETHER' : ''
-}
-
 const StyledBalanceText = styled(Text)`
   white-space: nowrap;
   overflow: hidden;
@@ -26,13 +23,24 @@ const StyledBalanceText = styled(Text)`
   text-overflow: ellipsis;
 `
 
+const MenuLink = styled(MenuItem)`
+  text-decoration: none;
+  color: #111111;
+  grid-template-columns: auto minmax(auto, 1fr) minmax(0, 72px);
+`
+
 function Balance({ balance }: { balance: CurrencyAmount }) {
   return <StyledBalanceText title={balance.toExact()}>{balance.toSignificant(4)}</StyledBalanceText>
 }
 
-export default function CurrencyRow({ currency, onSelect }: { currency: Currency; onSelect: () => void }) {
+export default function CurrencyRow({
+  currency,
+  getLink
+}: {
+  currency: Currency
+  getLink: (currency: Currency) => string
+}) {
   const { account, chainId } = useActiveWeb3React()
-  const key = currencyKey(currency)
   const selectedTokenList = useSelectedTokenList()
   const isOnSelectedList = isTokenOnList(selectedTokenList, currency)
   const customAdded = useIsUserAddedToken(currency)
@@ -43,7 +51,7 @@ export default function CurrencyRow({ currency, onSelect }: { currency: Currency
 
   // only show add or remove buttons if not on selected list
   return (
-    <MenuItem className={`token-item-${key}`} onClick={onSelect}>
+    <MenuLink as={Link} to={getLink(currency)}>
       <CurrencyLogo currency={currency} size={'24px'} />
       <Column>
         <Text title={currency.name} fontWeight={500}>
@@ -82,6 +90,6 @@ export default function CurrencyRow({ currency, onSelect }: { currency: Currency
       <RowFixed style={{ justifySelf: 'flex-end' }}>
         {balance ? <Balance balance={balance} /> : account ? <Loader /> : null}
       </RowFixed>
-    </MenuItem>
+    </MenuLink>
   )
 }

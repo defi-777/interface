@@ -1,4 +1,4 @@
-import { CurrencyAmount, JSBI, Token, Trade } from '@uniswap/sdk'
+import { Currency, CurrencyAmount, JSBI, Token, Trade, ETHER } from '@uniswap/sdk'
 import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { ArrowDown } from 'react-feather'
 import ReactGA from 'react-ga'
@@ -44,6 +44,9 @@ import AppBody from '../AppBody'
 import { ClickableText } from '../Pool/styleds'
 import Loader from '../../components/Loader'
 import AssetList from '../../components/AssetList'
+
+const getTokenLink = (currency: Currency): string =>
+  `/token/${currency instanceof Token ? currency.address : currency === ETHER ? 'ETH' : ''}`
 
 export default function Swap() {
   const loadedUrlParams = useDefaultsFromURLSearch()
@@ -373,7 +376,7 @@ export default function Swap() {
                 </AutoColumn>
               </Card>
             )}
-            <AssetList />
+            <AssetList getLink={getTokenLink} />
           </AutoColumn>
           <BottomGrouping>
             {!account ? (
