@@ -1,1 +1,1 @@
-export { default } from './TokenPage';
+export { default } from './TokenPage'

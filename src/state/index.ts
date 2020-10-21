@@ -20,7 +20,7 @@ const store = configureStore({
     swap,
     mint,
     burn,
-    multicall,
+    multicall
   },
   middleware: [...getDefaultMiddleware({ thunk: false }), save({ states: PERSISTED_KEYS })],
   preloadedState: load({ states: PERSISTED_KEYS })

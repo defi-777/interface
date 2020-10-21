@@ -49,7 +49,7 @@ const actions: Action[] = [
     name: 'Unwrap',
     description: 'Convert to ERC-20 token',
     supportsToken: () => true
-  },
+  }
 ]
 
 export default actions

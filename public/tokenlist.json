@@ -1,11 +1,7 @@
 {
   "name": "DeFi777",
   "logoURI": "https://raw.githubusercontent.com/Synthetixio/synthetix-assets/v2.0.3/snx/SNX.svg",
-  "keywords": [
-    "defi",
-    "defi777",
-    "wrapper"
-  ],
+  "keywords": ["defi", "defi777", "wrapper"],
   "timestamp": "2020-10-08T09:44:03.362Z",
   "tags": {
     "erc777": {
@@ -51,9 +47,7 @@
       "name": "Dai-777",
       "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/Synthetixio/synthetix-assets/v2.0.3/snx/SNX.svg",
-      "tags": [
-        "erc777"
-      ]
+      "tags": ["erc777"]
     },
     {
       "chainId": 1,
@@ -62,10 +56,7 @@
       "name": "Synth Inverse Cardano",
       "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/Synthetixio/synthetix-assets/v2.0.3/synths/iADA.svg",
-      "tags": [
-        "inverse",
-        "synth"
-      ]
+      "tags": ["inverse", "synth"]
     }
   ]
 }

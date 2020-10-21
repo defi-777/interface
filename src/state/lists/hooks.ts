@@ -71,7 +71,7 @@ export function listToTokenMap(list: TokenList): TokenAddressMap {
 }
 
 export function useTokenList(url: string | undefined): TokenAddressMap {
-  const [tokenList, setTokenList] = useState<TokenList | null>(null);
+  const [tokenList, setTokenList] = useState<TokenList | null>(null)
   return useMemo(() => {
     if (!url) return EMPTY_LIST
     if (!tokenList) {
