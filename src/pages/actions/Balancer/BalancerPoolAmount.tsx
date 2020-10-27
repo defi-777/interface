@@ -7,10 +7,12 @@ import AppBody from '../../AppBody'
 import { useCurrencyBalance } from '../../../state/wallet/hooks'
 import { useActiveWeb3React } from '../../../hooks'
 import { useCurrency } from '../../../hooks/Tokens'
+import { useTransferCallback } from '../../../hooks/useTransferCallback'
 import { Wrapper } from '../../../components/swap/styleds'
 import { TYPE } from '../../../theme'
 import { Input as NumericalInput } from '../../../components/NumericalInput'
 import { ButtonPrimary } from '../../../components/Button'
+import { tryParseAmount } from '../../../state/swap/hooks'
 
 const InputRow = styled.div`
   ${({ theme }) => theme.flexRowNoWrap}
@@ -57,11 +59,20 @@ export default function UniswapAmount({
   const { account } = useActiveWeb3React()
   const selectedCurrencyBalance = useCurrencyBalance(account ?? undefined, tokenIn ?? undefined)
 
+  const tokenAmount = tryParseAmount(amount, tokenIn ?? undefined)
+  const { callback: transferCallback } = useTransferCallback(tokenIn, tokenAmount, poolAdapter)
+
   const send = async () => {
+    if (!transferCallback) {
+      return
+    }
     setSending(true)
     try {
-      history.push(`/uniswap/sent/0x`)
-    } catch (e) {}
+      const hash = await transferCallback()
+      history.push(`/uniswap/sent/${hash}`)
+    } catch (e) {
+      console.error(e)
+    }
     setSending(false)
   }
 
@@ -93,7 +104,7 @@ export default function UniswapAmount({
 
           <ButtonPrimary onClick={send} disabled={!amount || sending || parseFloat(amount) === 0}>
             <Text fontSize={16} fontWeight={500}>
-              Swap
+              Deposit
             </Text>
           </ButtonPrimary>
         </AutoColumn>

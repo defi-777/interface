@@ -6,6 +6,7 @@ import { BigNumber } from '@ethersproject/bignumber'
 // import { ROUTER_ADDRESS } from '../constants'
 import { ChainId, JSBI, Percent, Token, CurrencyAmount, Currency, ETHER } from '@uniswap/sdk'
 import { TokenAddressMap } from '../state/lists/hooks'
+import ERC20_ABI from '../constants/abis/erc20.json'
 
 // returns the checksummed address if the address is valid, otherwise returns false
 export function isAddress(value: any): string | false {
@@ -96,6 +97,10 @@ export function getContract(address: string, ABI: any, library: Web3Provider, ac
   return new Contract(address, ABI, getProviderOrSigner(library, account) as any)
 }
 
+export function getTokenContract(address: string, library: Web3Provider, account?: string): Contract {
+  return new Contract(address, ERC20_ABI, getProviderOrSigner(library, account) as any)
+}
+
 export function escapeRegExp(string: string): string {
   return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') // $& means the whole matched string
 }
@@ -103,4 +108,8 @@ export function escapeRegExp(string: string): string {
 export function isTokenOnList(defaultTokens: TokenAddressMap, currency?: Currency): boolean {
   if (currency === ETHER) return true
   return Boolean(currency instanceof Token && defaultTokens[currency.chainId]?.[currency.address])
+}
+
+export function toHex(currencyAmount: CurrencyAmount): string {
+  return `0x${currencyAmount.raw.toString(16)}`
 }
