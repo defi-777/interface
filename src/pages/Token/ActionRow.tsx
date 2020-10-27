@@ -18,7 +18,7 @@ const MenuLink = styled(MenuItem)`
 `
 
 function currencyKey(currency: Currency): string {
-  return currency instanceof Token ? currency.address : currency === ETHER ? 'ETHER' : ''
+  return currency instanceof Token ? currency.address : currency === ETHER ? 'ETH' : ''
 }
 
 export default function ActionRow({

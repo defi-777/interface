@@ -24,6 +24,7 @@ import Swap from './Swap'
 import Token from './Token'
 import { RedirectPathToSwapOnly, RedirectToSwap } from './Swap/redirects'
 import Uniswap from './actions/Uniswap'
+import Balancer from './actions/Balancer'
 
 import Vote from './Vote'
 
@@ -97,6 +98,7 @@ export default function App() {
               <Route exact strict path="/remove/:currencyIdA/:currencyIdB" component={RemoveLiquidity} />
               <Route exact strict path="/uni/:currencyIdA/:currencyIdB" component={Manage} />
               <Route path="/uniswap" component={Uniswap} />
+              <Route path={['/balancer-pool', '/balancer-exit']} component={Balancer} />
               <Route component={RedirectPathToSwapOnly} />
             </Switch>
           </Web3ReactManager>

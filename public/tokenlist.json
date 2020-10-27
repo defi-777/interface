@@ -57,6 +57,32 @@
       "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/Synthetixio/synthetix-assets/v2.0.3/synths/iADA.svg",
       "tags": ["inverse", "synth"]
+    },
+
+
+    {
+      "chainId": 42,
+      "address": "0x4F96Fe3b7A6Cf9725f59d353F723c1bDb64CA6Aa",
+      "symbol": "DAI",
+      "name": "Dai Stablecoin",
+      "decimals": 18,
+      "tags": ["erc20"]
+    },
+    {
+      "chainId": 42,
+      "address": "0x6502726110d47F34395460A12b71b2C27747F474",
+      "symbol": "Dai777",
+      "name": "Dai-777",
+      "decimals": 18,
+      "tags": ["erc777"]
+    },
+    {
+      "chainId": 42,
+      "address": "0x05f762770A45bB52A239E1cbFEE559A23De9b541",
+      "symbol": "BPT",
+      "name": "WETH/MKR Balancer Pool",
+      "decimals": 18,
+      "tags": ["erc777", "balancer", "farmer"]
     }
   ]
 }

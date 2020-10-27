@@ -26,7 +26,7 @@ export default function Swap({
 
   return (
     <AppBody>
-      <pre>{JSON.stringify(token)}</pre>
+      <h2>{token.name}</h2>
       <Wrapper>
         <AutoColumn gap={'md'}>
           <ActionList token={token} disabled={!account} />
