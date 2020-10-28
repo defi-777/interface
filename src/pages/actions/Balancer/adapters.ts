@@ -10,4 +10,13 @@ export const entryAdapters: Adapter[] = [
   }
 ]
 
-export const exitAdapters: Adapter[] = []
+export const exitAdapters: Adapter[] = [
+  {
+    address: '0xaf5d029ae732E6C0FdAFb63C4D6d91E2710fbBB0',
+    name: 'ETH'
+  },
+  {
+    address: '0xE11BC802a0402974b821b7d71B7e544BfF784b95',
+    name: 'MKR'
+  }
+]
