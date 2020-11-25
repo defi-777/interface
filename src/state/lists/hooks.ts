@@ -89,7 +89,7 @@ export function useTokenList(url: string | undefined): TokenAddressMap {
 }
 
 export function useSelectedListUrl(): string | undefined {
-  return '/tokenlist.json'
+  return 'https://defi777-kovan-api.vercel.app/api/tokenlist.json'
 }
 
 export function useSelectedTokenList(): TokenAddressMap {
