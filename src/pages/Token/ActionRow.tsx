@@ -8,7 +8,7 @@ import { RowFixed } from '../../components/Row'
 import CurrencyLogo from '../../components/CurrencyLogo'
 import { FadedSpan, MenuItem } from '../../components/SearchModal/styleds'
 import { ChevronRight } from 'react-feather'
-import { Action } from '../../actions/actions'
+import { Action } from '../../state/actions/types'
 
 const MenuLink = styled(MenuItem)`
   text-decoration: none;
@@ -32,7 +32,7 @@ export default function ActionRow({
 }) {
   // only show add or remove buttons if not on selected list
   return (
-    <MenuLink as={Link} to={`/${action.id}/${currencyKey(currency)}`}>
+    <MenuLink as={Link} to={`/action/${action.id}/${currencyKey(currency)}`}>
       <CurrencyLogo currency={currency} size={'24px'} />
       <Column>
         <Text title={currency.name} fontWeight={500}>
