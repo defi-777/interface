@@ -7,6 +7,7 @@ import { BigNumber } from '@ethersproject/bignumber'
 import { ChainId, JSBI, Percent, Token, CurrencyAmount, Currency, ETHER } from '@uniswap/sdk'
 import { TokenAddressMap } from '../state/lists/hooks'
 import ERC20_ABI from '../constants/abis/erc20.json'
+import WRAPPED777_ABI from '../constants/abis/Wrapped777.json'
 
 // returns the checksummed address if the address is valid, otherwise returns false
 export function isAddress(value: any): string | false {
@@ -95,6 +96,10 @@ export function getContract(address: string, ABI: any, library: Web3Provider, ac
   }
 
   return new Contract(address, ABI, getProviderOrSigner(library, account) as any)
+}
+
+export function getWrapperContract(address: string, library: Web3Provider, account?: string): Contract {
+  return new Contract(address, WRAPPED777_ABI, getProviderOrSigner(library, account) as any)
 }
 
 export function getTokenContract(address: string, library: Web3Provider, account?: string): Contract {

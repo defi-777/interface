@@ -30,9 +30,10 @@ export default function ActionRow({
   currency: Currency
   disabled?: boolean
 }) {
-  // only show add or remove buttons if not on selected list
+  const key = currencyKey(currency)
+  const path = action.path ? action.path.replace(':token', key) : `/action/${action.id}/${key}`
   return (
-    <MenuLink as={Link} to={`/action/${action.id}/${currencyKey(currency)}`}>
+    <MenuLink as={Link} to={path}>
       <CurrencyLogo currency={currency} size={'24px'} />
       <Column>
         <Text title={currency.name} fontWeight={500}>

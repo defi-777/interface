@@ -23,6 +23,7 @@ export default function Swap({
       </AppBody>
     )
   }
+  console.log(token)
 
   return (
     <AppBody>

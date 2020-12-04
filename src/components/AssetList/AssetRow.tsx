@@ -49,6 +49,10 @@ export default function CurrencyRow({
   const removeToken = useRemoveUserAddedToken()
   const addToken = useAddUserToken()
 
+  if (!balance || balance.toExact() === '0') {
+    return null
+  }
+
   // only show add or remove buttons if not on selected list
   return (
     <MenuLink as={Link} to={getLink(currency)}>

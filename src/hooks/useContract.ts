@@ -2,6 +2,7 @@ import { Contract } from '@ethersproject/contracts'
 import { ChainId, WETH } from '@uniswap/sdk'
 import { abi as IUniswapV2PairABI } from '@uniswap/v2-core/build/IUniswapV2Pair.json'
 import { useMemo } from 'react'
+import { ADDRESS_BOOK_ABI, ADDRESS_BOOK_ADDRESS } from '../constants/abis/address-book'
 import {
   ARGENT_WALLET_DETECTOR_ABI,
   ARGENT_WALLET_DETECTOR_MAINNET_ADDRESS
@@ -43,6 +44,10 @@ export function useV2MigratorContract(): Contract | null {
 
 export function useV1ExchangeContract(address?: string, withSignerIfPossible?: boolean): Contract | null {
   return useContract(address, V1_EXCHANGE_ABI, withSignerIfPossible)
+}
+
+export function useAddressBookContract(): Contract | null {
+  return useContract(ADDRESS_BOOK_ADDRESS, ADDRESS_BOOK_ABI, false)
 }
 
 export function useTokenContract(tokenAddress?: string, withSignerIfPossible?: boolean): Contract | null {

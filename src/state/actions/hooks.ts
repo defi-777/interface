@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
+import { Currency } from '@uniswap/sdk'
 import { Action } from './types'
 import { AppDispatch, AppState } from '../index'
 import { actionFetchStarted, actionFetchCompleted, actionFetchFailed } from './actions'
@@ -9,11 +10,24 @@ async function fetchActions() {
   return result.actions
 }
 
-export function useActions(): Action[] {
+function actionMatchesToken(action: Action, token: any): boolean {
+  if (!action.includeTag && !action.excludeTag) {
+    return true
+  }
+
+  const tags = token.tokenInfo?.tags ?? []
+
+  const include = !action.includeTag || tags.indexOf(action.includeTag) !== -1
+  const exclude = !action.excludeTag || tags.indexOf(action.excludeTag) === -1
+
+  return include && exclude
+}
+
+export function useActions(token: Currency): Action[] {
   const actions = useSelector<AppState, AppState['actions']>(state => state.actions)
   const dispatch = useDispatch<AppDispatch>()
 
-  if (actions.actionIds.length === 0 && !actions.updating) {
+  if (!actions.fetched && !actions.updating) {
     dispatch(actionFetchStarted())
     fetchActions()
       .then((actions: any) => dispatch(actionFetchCompleted(actions)))
@@ -22,7 +36,9 @@ export function useActions(): Action[] {
         dispatch(actionFetchFailed())
       })
   }
-  return actions.actionIds.map((id: string) => actions.byId[id]!)
+  return actions.actionIds
+    .map((id: string) => actions.byId[id]!)
+    .filter((action: Action) => actionMatchesToken(action, token))
 }
 
 export function useAction(id: string): Action | null {

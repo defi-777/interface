@@ -113,6 +113,7 @@
   "license": "GPL-3.0-or-later",
   "dependencies": {
     "@uniswap/sdk": "^3.0.3",
-    "@uniswap/token-lists": "^1.0.0-beta.17"
+    "@uniswap/token-lists": "^1.0.0-beta.17",
+    "eth-permit": "^0.1.9"
   }
 }

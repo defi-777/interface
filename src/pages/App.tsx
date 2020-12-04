@@ -25,7 +25,7 @@ import Swap from './Swap'
 import Token from './Token'
 import { RedirectPathToSwapOnly, RedirectToSwap } from './Swap/redirects'
 import Wrap from './Wrap'
-
+import SentPage from './Sent'
 import Vote from './Vote'
 
 const AppWrapper = styled.div`
@@ -99,6 +99,7 @@ export default function App() {
               <Route exact strict path="/uni/:currencyIdA/:currencyIdB" component={Manage} />
               <Route path="/action/:actionId/:currencyId/:adapter?" component={Action} />
               <Route path="/wrap/:currencyIdA" component={Wrap} />
+              <Route path="/sent/:txHash" component={SentPage} />
               <Route component={RedirectPathToSwapOnly} />
             </Switch>
           </Web3ReactManager>

@@ -4,7 +4,8 @@ import ActionRow from './ActionRow'
 import { useActions } from '../../state/actions/hooks'
 
 export default function ActionList({ token, disabled }: { token: Currency; disabled?: boolean }) {
-  const actions = useActions()
+  const actions = useActions(token)
+
   return (
     <div>
       {actions.map(action => (
