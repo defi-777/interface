@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import styled from 'styled-components'
 import GoogleAnalyticsReporter from '../components/analytics/GoogleAnalyticsReporter'
 import Header from '../components/Header'
@@ -23,7 +23,6 @@ import RemoveLiquidity from './RemoveLiquidity'
 import { RedirectOldRemoveLiquidityPathStructure } from './RemoveLiquidity/redirects'
 import Swap from './Swap'
 import Token from './Token'
-import { RedirectPathToSwapOnly, RedirectToSwap } from './Swap/redirects'
 import Wrap from './Wrap'
 import SentPage from './Sent'
 import Vote from './Vote'
@@ -80,8 +79,6 @@ export default function App() {
           <Web3ReactManager>
             <Switch>
               <Route exact strict path="/swap" component={Swap} />
-              <Route exact strict path="/swap/:outputCurrency" component={RedirectToSwap} />
-              <Route exact strict path="/send" component={RedirectPathToSwapOnly} />
               <Route exact strict path="/token/:address" component={Token} />
               <Route exact strict path="/find" component={PoolFinder} />
               <Route exact strict path="/pool" component={Pool} />
@@ -100,7 +97,7 @@ export default function App() {
               <Route path="/action/:actionId/:currencyId/:adapter?" component={Action} />
               <Route path="/wrap/:currencyIdA" component={Wrap} />
               <Route path="/sent/:txHash" component={SentPage} />
-              <Route component={RedirectPathToSwapOnly} />
+              <Redirect to="/swap" />
             </Switch>
           </Web3ReactManager>
           <Marginer />
