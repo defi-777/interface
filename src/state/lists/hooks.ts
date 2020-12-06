@@ -3,6 +3,7 @@ import { ChainId, Token } from '@uniswap/sdk'
 import { Tags, TokenInfo, TokenList } from '@uniswap/token-lists'
 import { useMemo } from 'react'
 import getTokenList from '../../utils/getTokenList'
+import { useActiveWeb3React } from '../../hooks'
 
 type TagDetails = Tags[keyof Tags]
 export interface TagInfo extends TagDetails {
@@ -88,8 +89,15 @@ export function useTokenList(url: string | undefined): TokenAddressMap {
   }, [url, tokenList])
 }
 
+const chains: { [chainId: number]: string } = {
+  1: 'mainnet',
+  42: 'kovan'
+}
+
 export function useSelectedListUrl(): string | undefined {
-  return 'https://defi777-kovan-api.vercel.app/api/tokenlist.json'
+  const { chainId } = useActiveWeb3React()
+  const network = chains[chainId as number]
+  return `https://defi777-kovan-api.vercel.app/api/${network}/tokenlist.json`
 }
 
 export function useSelectedTokenList(): TokenAddressMap {
