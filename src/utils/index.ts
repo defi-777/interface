@@ -4,8 +4,7 @@ import { AddressZero } from '@ethersproject/constants'
 import { JsonRpcSigner, Web3Provider } from '@ethersproject/providers'
 import { BigNumber } from '@ethersproject/bignumber'
 // import { ROUTER_ADDRESS } from '../constants'
-import { ChainId, JSBI, Percent, Token, CurrencyAmount, Currency, ETHER } from '@uniswap/sdk'
-import { TokenAddressMap } from '../state/lists/hooks'
+import { ChainId, JSBI, Percent, CurrencyAmount } from '@uniswap/sdk'
 import ERC20_ABI from '../constants/abis/erc20.json'
 import WRAPPED777_ABI from '../constants/abis/Wrapped777.json'
 
@@ -108,11 +107,6 @@ export function getTokenContract(address: string, library: Web3Provider, account
 
 export function escapeRegExp(string: string): string {
   return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') // $& means the whole matched string
-}
-
-export function isTokenOnList(defaultTokens: TokenAddressMap, currency?: Currency): boolean {
-  if (currency === ETHER) return true
-  return Boolean(currency instanceof Token && defaultTokens[currency.chainId]?.[currency.address])
 }
 
 export function toHex(currencyAmount: CurrencyAmount): string {

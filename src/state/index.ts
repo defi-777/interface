@@ -9,6 +9,7 @@ import transactions from './transactions/reducer'
 import swap from './swap/reducer'
 import mint from './mint/reducer'
 import burn from './burn/reducer'
+import tokens from './tokens/reducer'
 import multicall from './multicall/reducer'
 
 const PERSISTED_KEYS: string[] = ['user', 'transactions']
@@ -22,6 +23,7 @@ const store = configureStore({
     swap,
     mint,
     burn,
+    tokens,
     multicall
   },
   middleware: [...getDefaultMiddleware({ thunk: false }), save({ states: PERSISTED_KEYS })],

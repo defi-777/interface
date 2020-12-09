@@ -53,7 +53,7 @@ export function useAction(id: string): Action | null {
   const dispatch = useDispatch<AppDispatch>()
   const { chainId } = useActiveWeb3React()
 
-  if (actions.actionIds.length === 0 && !actions.updating) {
+  if (!actions.fetched && !actions.updating) {
     dispatch(actionFetchStarted())
     fetchActions(chains[chainId as number])
       .then((actions: any) => dispatch(actionFetchCompleted(actions)))
