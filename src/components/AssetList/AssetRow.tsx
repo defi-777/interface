@@ -1,10 +1,12 @@
 import React from 'react'
-import { Currency, CurrencyAmount } from '@uniswap/sdk'
+import { CurrencyAmount } from '@uniswap/sdk'
 import { Text } from 'rebass'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { useActiveWeb3React } from '../../hooks'
 import { useCurrencyBalance } from '../../state/wallet/hooks'
+import { Token } from '../../state/tokens/types'
+import { tokenToCurrency } from '../../state/tokens/utils'
 import Column from '../Column'
 import { RowFixed } from '../Row'
 import CurrencyLogo from '../CurrencyLogo'
@@ -28,23 +30,17 @@ function Balance({ balance }: { balance: CurrencyAmount }) {
   return <StyledBalanceText title={balance.toExact()}>{balance.toSignificant(4)}</StyledBalanceText>
 }
 
-export default function CurrencyRow({
-  currency,
-  getLink
-}: {
-  currency: Currency
-  getLink: (currency: Currency) => string
-}) {
+const AssetRow: React.FC<{ token: Token }> = ({ token }) => {
   const { account } = useActiveWeb3React()
+  const currency = tokenToCurrency(token)
   const balance = useCurrencyBalance(account ?? undefined, currency)
 
   if (!balance || balance.toExact() === '0') {
     return null
   }
 
-  // only show add or remove buttons if not on selected list
   return (
-    <MenuLink as={Link} to={getLink(currency)}>
+    <MenuLink as={Link} to={`token/${token.address}`}>
       <CurrencyLogo currency={currency} size={'24px'} />
       <Column>
         <Text title={currency.name} fontWeight={500}>
@@ -58,3 +54,5 @@ export default function CurrencyRow({
     </MenuLink>
   )
 }
+
+export default AssetRow

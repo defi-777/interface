@@ -1,20 +1,17 @@
-import React from 'react'
-import { useAllTokens } from '../../hooks/Tokens'
-import { Currency, ETHER, Token } from '@uniswap/sdk'
+import React, { Fragment } from 'react'
+import { useTokens } from '../../state/tokens/hooks'
+import { Token } from '../../state/tokens/types'
 import AssetRow from './AssetRow'
 
-function currencyKey(currency: Currency): string {
-  return currency instanceof Token ? currency.address : currency === ETHER ? 'ETHER' : ''
-}
-
-export default function AssetList({ getLink }: { getLink: (currency: Currency) => string }) {
-  const allTokens = useAllTokens()
-  const tokens = [Currency.ETHER, ...Object.values(allTokens)]
+export default function AssetList() {
+  const tokens = useTokens()
 
   return (
     <div>
-      {tokens.map(token => (
-        <AssetRow key={currencyKey(token)} currency={token} getLink={getLink} />
+      {tokens.map((token: Token) => (
+        <Fragment key={token.address}>
+          <AssetRow token={token} />
+        </Fragment>
       ))}
     </div>
   )

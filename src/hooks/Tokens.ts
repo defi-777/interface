@@ -1,6 +1,7 @@
 import { Currency, ETHER, Token, currencyEquals } from '@uniswap/sdk'
 import { useMemo } from 'react'
 import { useToken as useTokenNew, useTokens } from '../state/tokens/hooks'
+import { tokenToCurrency } from '../state/tokens/utils'
 import { useUserAddedTokens } from '../state/user/hooks'
 import { isAddress } from '../utils'
 
@@ -17,7 +18,7 @@ export function useAllTokens(): { [address: string]: Token } {
         // reduce into all ALL_TOKENS filtered by the current chain
         .reduce<{ [address: string]: Token }>(
           (tokenMap, token) => {
-            tokenMap[token.address] = new Token(chainId, token.address, 18, token.symbol, token.name)
+            tokenMap[token.address] = tokenToCurrency(token) as Token
             return tokenMap
           },
           // must make a copy because reduce modifies the map, and we do not
@@ -46,7 +47,7 @@ export function useToken(tokenAddress?: string): Token | undefined | null {
   return useMemo(() => {
     if (!token) return null
     if (!chainId || !address) return undefined
-    return new Token(chainId, address, token.decimals, token.symbol, token.name)
+    return tokenToCurrency(token) as Token
   }, [address, chainId, token])
 }
 
