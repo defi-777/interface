@@ -5,7 +5,7 @@ import { tokenFetchStarted, tokenFetchCompleted, tokenFetchFailed } from './acti
 import { useActiveWeb3React } from '../../hooks'
 
 async function fetchTokens(network: string) {
-  const request = await fetch(`https://defi777-kovan-api.vercel.app/api/${network}/tokens.json`)
+  const request = await fetch(`https://defi777-api.vercel.app/api/${network}/tokens.json`)
   const result = await request.json()
   return result
 }
@@ -15,7 +15,7 @@ const chains: { [chainId: number]: string } = {
   42: 'kovan'
 }
 
-export function useTokens(): Token[] {
+export function useTokens({ yieldAdapter }: { yieldAdapter?: boolean } = {}): Token[] {
   const tokens = useSelector<AppState, AppState['tokens']>(state => state.tokens)
   const dispatch = useDispatch<AppDispatch>()
   const { chainId } = useActiveWeb3React()
@@ -29,7 +29,14 @@ export function useTokens(): Token[] {
         dispatch(tokenFetchFailed())
       })
   }
-  return tokens.addresses.map((address: string) => tokens.byAddress[address]!)
+  return tokens.addresses
+    .map((address: string) => tokens.byAddress[address]!)
+    .filter((token: Token) => {
+      if (yieldAdapter !== undefined) {
+        return !!token.yieldAdapter === yieldAdapter
+      }
+      return true
+    })
 }
 
 export function useToken(address?: string | null): Token | null {

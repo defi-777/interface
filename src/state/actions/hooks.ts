@@ -6,7 +6,7 @@ import { actionFetchStarted, actionFetchCompleted, actionFetchFailed } from './a
 import { useActiveWeb3React } from '../../hooks'
 
 async function fetchActions(network: string) {
-  const request = await fetch(`https://defi777-kovan-api.vercel.app/api/${network}/actions.json`)
+  const request = await fetch(`https://defi777-api.vercel.app/api/${network}/actions.json`)
   const result = await request.json()
   return result.actions
 }

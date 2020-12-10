@@ -35,7 +35,8 @@ function createERC777(token: any): Token {
       token.yieldWrappers.map((wrapper: any) => ({
         name: wrapper.underlyingName,
         symbol: wrapper.underlyingSymbol,
-        address: wrapper.id,
+        address: wrapper.address,
+        yieldAdapter: wrapper.yieldAdapter,
         underlyingAddress: wrapper.underlyingAddress
       }))
   }
@@ -43,6 +44,19 @@ function createERC777(token: any): Token {
 
 function createERC20(token: any): Token {
   return { ...createToken(token), type: 'erc20' }
+}
+
+function createYieldAdapter(token: any, wrapper: any): Token {
+  return {
+    type: 'erc777',
+    decimals: 18,
+    chainId: token.chainId,
+    yieldAdapter: true,
+    name: wrapper.underlyingName,
+    symbol: wrapper.underlyingSymbol,
+    address: wrapper.yieldAdapter,
+    underlyingAddress: wrapper.underlyingAddress
+  }
 }
 
 export default createReducer(initialState, builder =>
@@ -56,6 +70,11 @@ export default createReducer(initialState, builder =>
       for (const token of tokens.erc777s) {
         addresses.push(token.address)
         state.byAddress[token.address] = createERC777(token)
+
+        for (const wrapper of token.yieldWrappers || []) {
+          addresses.push(wrapper.yieldAdapter)
+          state.byAddress[wrapper.yieldAdapter] = createYieldAdapter(token, wrapper)
+        }
       }
       for (const token of tokens.erc20s) {
         addresses.push(token.address)

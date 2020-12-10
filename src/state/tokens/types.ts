@@ -5,12 +5,14 @@ export interface Token {
   readonly symbol: string
   readonly address: string
   readonly decimals: number
+  readonly yieldAdapter?: boolean
   readonly protocol?: string
   readonly underlyingAddress?: string
   readonly yieldWrappers?: {
     readonly name: string
     readonly symbol: string
     readonly address: string
+    readonly yieldAdapter: string
     readonly underlyingAddress: string
   }[]
 }
