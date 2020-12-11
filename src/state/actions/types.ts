@@ -16,6 +16,7 @@ export interface Action {
   includeProtocol?: TokenProtocol[]
   includeUnderlying?: string[]
   readonly adapters: Adapter[]
+  readonly sort?: number
 }
 
 export interface ActionsState {

@@ -18,6 +18,14 @@ const hardcodedActions: { [id: string]: Action } = {
     path: '/claim/:token',
     includeType: ['yield'],
     adapters: []
+  },
+  send: {
+    id: 'send',
+    name: 'Send',
+    description: 'Transfer to another address',
+    path: '/send/:token',
+    adapters: [],
+    sort: -1
   }
 }
 const hardcodedIds = Object.keys(hardcodedActions)

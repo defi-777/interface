@@ -47,6 +47,7 @@ export function useActions(token: Token): Action[] {
   return actions.actionIds
     .map((id: string) => actions.byId[id]!)
     .filter((action: Action) => actionMatchesToken(action, token))
+    .sort((a: Action, b: Action) => (b.sort || 0) - (a.sort || 0))
 }
 
 export function useAction(id: string): Action | null {

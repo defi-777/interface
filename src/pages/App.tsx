@@ -9,11 +9,10 @@ import Web3ReactManager from '../components/Web3ReactManager'
 import DarkModeQueryParamReader from '../theme/DarkModeQueryParamReader'
 import Action from './Action'
 import Claim from './Claim'
-import Earn from './Earn'
-import Manage from './Earn/Manage'
 import Swap from './Swap'
 import Token from './Token'
 import Wrap from './Wrap'
+import SendPage from './Send'
 import SentPage from './Sent'
 
 const AppWrapper = styled.div`
@@ -68,11 +67,10 @@ export default function App() {
             <Switch>
               <Route exact strict path="/swap" component={Swap} />
               <Route exact strict path="/token/:address" component={Token} />
-              <Route exact strict path="/uni" component={Earn} />
-              <Route exact strict path="/uni/:currencyIdA/:currencyIdB" component={Manage} />
               <Route path="/action/:actionId/:currencyId/:adapter?" component={Action} />
               <Route path="/wrap/:currencyIdA" component={Wrap} />
               <Route path="/claim/:adapterAddress" component={Claim} />
+              <Route path="/send/:token" component={SendPage} />
               <Route path="/sent/:txHash" component={SentPage} />
               <Redirect to="/swap" />
             </Switch>
