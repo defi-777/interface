@@ -4,11 +4,11 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import Column from '../../components/Column'
 import { RowFixed } from '../../components/Row'
-import CurrencyLogo from '../../components/CurrencyLogo'
 import { FadedSpan, MenuItem } from '../../components/SearchModal/styleds'
 import { ChevronRight } from 'react-feather'
 import { Action } from '../../state/actions/types'
 import { Token } from '../../state/tokens/types'
+import ActionIcon from './ActionIcon'
 
 const MenuLink = styled(MenuItem)`
   text-decoration: none;
@@ -31,7 +31,7 @@ const ActionRow: React.FC<ActionRowProps> = ({ action, token, disabled }) => {
   const path = action.path ? action.path.replace(':token', token.address) : `/action/${action.id}/${token.address}`
   return (
     <MenuLink as={Link} to={path}>
-      <CurrencyLogo currency={token} size={'24px'} />
+      <ActionIcon id={action.id} />
       <Column>
         <Text title={action.name} fontWeight={500}>
           {action.name}
