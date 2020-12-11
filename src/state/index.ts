@@ -8,7 +8,6 @@ import user from './user/reducer'
 import transactions from './transactions/reducer'
 import swap from './swap/reducer'
 import mint from './mint/reducer'
-import burn from './burn/reducer'
 import tokens from './tokens/reducer'
 import multicall from './multicall/reducer'
 
@@ -22,7 +21,6 @@ const store = configureStore({
     transactions,
     swap,
     mint,
-    burn,
     tokens,
     multicall
   },
