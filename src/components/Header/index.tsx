@@ -17,7 +17,7 @@ import { YellowCard } from '../Card'
 // import Settings from '../Settings'
 import Menu from '../Menu'
 
-import /*Row,*/{ RowFixed } from '../Row'
+import { /*Row,*/ RowFixed } from '../Row'
 import Web3Status from '../Web3Status'
 
 const HeaderFrame = styled.div`

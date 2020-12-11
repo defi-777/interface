@@ -22,7 +22,6 @@ const StyledBalanceText = styled(Text)`
   text-overflow: ellipsis;
 `
 
-
 function Balance({ balance }: { balance: CurrencyAmount }) {
   return <StyledBalanceText title={balance.toExact()}>{balance.toSignificant(4)}</StyledBalanceText>
 }
