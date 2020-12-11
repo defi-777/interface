@@ -12,9 +12,13 @@ import { Token } from '../../state/tokens/types'
 
 const MenuLink = styled(MenuItem)`
   text-decoration: none;
-  color: #111111;
+  color: ${({ theme }) => theme.text1};
   grid-template-columns: auto minmax(auto, 1fr) minmax(0, 72px);
   height: 72px;
+`
+
+const Description = styled(FadedSpan)`
+  color: ${({ theme }) => theme.text2};
 `
 
 interface ActionRowProps {
@@ -32,7 +36,7 @@ const ActionRow: React.FC<ActionRowProps> = ({ action, token, disabled }) => {
         <Text title={action.name} fontWeight={500}>
           {action.name}
         </Text>
-        <FadedSpan>{action.description}</FadedSpan>
+        <Description>{action.description}</Description>
       </Column>
       {!disabled && (
         <RowFixed style={{ justifySelf: 'flex-end' }}>

@@ -22,8 +22,12 @@ const StyledBalanceText = styled(Text)`
 
 const MenuLink = styled(MenuItem)`
   text-decoration: none;
-  color: #111111;
+  color: ${({ theme }) => theme.text1};
   grid-template-columns: auto minmax(auto, 1fr) minmax(0, 72px);
+`
+
+const Subtitle = styled(FadedSpan)`
+  color: ${({ theme }) => theme.text2}
 `
 
 function Balance({ balance }: { balance: CurrencyAmount }) {
@@ -56,7 +60,7 @@ const AssetRow: React.FC<{ token: Token }> = ({ token }) => {
         <Text title={currency.name} fontWeight={500}>
           {currency.symbol}
         </Text>
-        <FadedSpan>{subtitle}</FadedSpan>
+        <Subtitle>{subtitle}</Subtitle>
       </Column>
       <RowFixed style={{ justifySelf: 'flex-end' }}>
         {balance ? <Balance balance={balance} /> : account ? <Loader /> : null}

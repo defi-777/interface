@@ -25,7 +25,7 @@ const MenuLink = styled(MenuItem)`
   padding-left: 40px;
   height: 36px;
   text-decoration: none;
-  color: #444444;
+  color: ${({ theme }) => theme.text2};
   font-size: 14px;
   grid-template-columns: auto minmax(auto, 1fr) minmax(0, 72px);
 `

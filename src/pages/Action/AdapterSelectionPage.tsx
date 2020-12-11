@@ -11,7 +11,7 @@ import { MenuItem } from '../../components/SearchModal/styleds'
 
 const MenuLink = styled(MenuItem)`
   text-decoration: none;
-  color: #111111;
+  color: ${({ theme }) => theme.text1};
   grid-template-columns: auto;
 `
 
