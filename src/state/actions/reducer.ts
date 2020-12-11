@@ -10,6 +10,14 @@ const hardcodedActions: { [id: string]: Action } = {
     path: '/wrap/:token',
     includeType: ['erc20'],
     adapters: []
+  },
+  claim: {
+    id: 'claim',
+    name: 'Claim',
+    description: 'Claim farmed tokens',
+    path: '/claim/:token',
+    includeType: ['yield'],
+    adapters: []
   }
 }
 const hardcodedIds = Object.keys(hardcodedActions)

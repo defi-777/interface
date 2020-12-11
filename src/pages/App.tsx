@@ -15,6 +15,7 @@ import {
   RedirectToAddLiquidity
 } from './AddLiquidity/redirects'
 import Action from './Action'
+import Claim from './Claim'
 import Earn from './Earn'
 import Manage from './Earn/Manage'
 import Pool from './Pool'
@@ -25,7 +26,6 @@ import Swap from './Swap'
 import Token from './Token'
 import Wrap from './Wrap'
 import SentPage from './Sent'
-import Vote from './Vote'
 
 const AppWrapper = styled.div`
   display: flex;
@@ -83,7 +83,6 @@ export default function App() {
               <Route exact strict path="/find" component={PoolFinder} />
               <Route exact strict path="/pool" component={Pool} />
               <Route exact strict path="/uni" component={Earn} />
-              <Route exact strict path="/vote" component={Vote} />
               <Route exact strict path="/create" component={RedirectToAddLiquidity} />
               <Route exact path="/add" component={AddLiquidity} />
               <Route exact path="/add/:currencyIdA" component={RedirectOldAddLiquidityPathStructure} />
@@ -96,6 +95,7 @@ export default function App() {
               <Route exact strict path="/uni/:currencyIdA/:currencyIdB" component={Manage} />
               <Route path="/action/:actionId/:currencyId/:adapter?" component={Action} />
               <Route path="/wrap/:currencyIdA" component={Wrap} />
+              <Route path="/claim/:adapterAddress" component={Claim} />
               <Route path="/sent/:txHash" component={SentPage} />
               <Redirect to="/swap" />
             </Switch>
