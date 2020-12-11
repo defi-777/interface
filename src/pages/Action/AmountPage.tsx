@@ -109,7 +109,7 @@ const AmountPage: React.FC<AmountPageProps> = ({ action, adapter, currency }) =>
 
           <ButtonPrimary onClick={send} disabled={!amount || sending || parseFloat(amount) === 0}>
             <Text fontSize={16} fontWeight={500}>
-              Swap
+              Send
             </Text>
           </ButtonPrimary>
         </AutoColumn>

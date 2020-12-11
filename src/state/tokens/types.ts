@@ -25,6 +25,7 @@ export const Ether: Token = {
   name: 'Ether',
   symbol: 'ETH',
   address: '0x0000000000000000000000000000000000000000',
+  underlyingAddress: '0x0000000000000000000000000000000000000000',
   protocol: null,
   decimals: 18
 }

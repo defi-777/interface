@@ -14,6 +14,7 @@ export interface Action {
   readonly path?: string
   includeType?: string[]
   includeProtocol?: TokenProtocol[]
+  includeUnderlying?: string[]
   readonly adapters: Adapter[]
 }
 

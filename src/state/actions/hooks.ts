@@ -18,6 +18,9 @@ function actionMatchesToken(action: Action, token: Token): boolean {
   if (action.includeProtocol && action.includeProtocol.indexOf(token.protocol) === -1) {
     return false
   }
+  if (action.includeUnderlying && action.includeUnderlying.indexOf(token.underlyingAddress || '') === -1) {
+    return false
+  }
 
   return true
 }

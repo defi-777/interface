@@ -30,7 +30,7 @@ function createERC777(token: any): Token {
     ...createToken(token),
     type: 'erc777',
     protocol: token.protocol,
-    underlyingAddress: token.underlyingAddress,
+    underlyingAddress: token.underlying,
     yieldWrappers:
       token.yieldWrappers &&
       token.yieldWrappers.map((wrapper: any) => ({
