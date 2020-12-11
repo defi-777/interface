@@ -39,6 +39,16 @@ const AssetRow: React.FC<{ token: Token }> = ({ token }) => {
     return null
   }
 
+  let subtitle = ''
+  if (token.type === 'erc20') {
+    subtitle = 'ERC20 Token'
+  } else if (token.type === 'erc777') {
+    subtitle = '777 Token'
+  }
+  if (token.protocol) {
+    subtitle = `${token.protocol} ${subtitle}`
+  }
+
   return (
     <MenuLink as={Link} to={`token/${token.address}`}>
       <CurrencyLogo currency={currency} size={'24px'} />
@@ -46,7 +56,7 @@ const AssetRow: React.FC<{ token: Token }> = ({ token }) => {
         <Text title={currency.name} fontWeight={500}>
           {currency.symbol}
         </Text>
-        <FadedSpan>Token</FadedSpan>
+        <FadedSpan>{subtitle}</FadedSpan>
       </Column>
       <RowFixed style={{ justifySelf: 'flex-end' }}>
         {balance ? <Balance balance={balance} /> : account ? <Loader /> : null}
