@@ -8,7 +8,7 @@ const hardcodedActions: { [id: string]: Action } = {
     name: 'Wrap',
     description: 'Supercharge your ERC20 tokens by convering to DeFi777 tokens',
     path: '/wrap/:token',
-    includeTag: 'erc20',
+    includeType: ['erc20'],
     adapters: []
   }
 }

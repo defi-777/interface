@@ -3,8 +3,7 @@ import { RouteComponentProps } from 'react-router'
 import { useActiveWeb3React } from '../../hooks'
 import { AutoColumn } from '../../components/Column'
 import AppBody from '../AppBody'
-import { useCurrency } from '../../hooks/Tokens'
-// import AssetList from '../../components/AssetList'
+import { useToken } from '../../state/tokens/hooks'
 import { Wrapper } from '../../components/swap/styleds'
 import ActionList from './ActionList'
 
@@ -14,7 +13,7 @@ export default function Swap({
   }
 }: RouteComponentProps<{ address: string }>) {
   const { account } = useActiveWeb3React()
-  const token = useCurrency(address)
+  const token = useToken(address)
 
   if (!token) {
     return (

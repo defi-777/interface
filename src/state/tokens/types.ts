@@ -1,12 +1,14 @@
+export type TokenProtocol = string | null
+
 export interface Token {
-  readonly type: 'erc20' | 'erc777' | 'eth'
+  readonly type: 'erc20' | 'erc777' | 'eth' | 'yield'
   readonly chainId: string
   readonly name: string
   readonly symbol: string
   readonly address: string
   readonly decimals: number
   readonly yieldAdapter?: boolean
-  readonly protocol?: string
+  readonly protocol: TokenProtocol
   readonly underlyingAddress?: string
   readonly yieldWrappers?: {
     readonly name: string
@@ -23,6 +25,7 @@ export const Ether: Token = {
   name: 'Ether',
   symbol: 'ETH',
   address: '0x0000000000000000000000000000000000000000',
+  protocol: null,
   decimals: 18
 }
 

@@ -20,6 +20,7 @@ function createToken(token: any) {
     symbol: token.symbol,
     address: token.address,
     decimals: token.decimals,
+    protocol: null,
     chainId: token.chainId
   }
 }
@@ -48,13 +49,14 @@ function createERC20(token: any): Token {
 
 function createYieldAdapter(token: any, wrapper: any): Token {
   return {
-    type: 'erc777',
+    type: 'yield',
     decimals: 18,
     chainId: token.chainId,
     yieldAdapter: true,
     name: wrapper.underlyingName,
     symbol: wrapper.underlyingSymbol,
     address: wrapper.yieldAdapter,
+    protocol: null,
     underlyingAddress: wrapper.underlyingAddress
   }
 }

@@ -1,16 +1,18 @@
 import React from 'react'
-import { Currency } from '@uniswap/sdk'
 import ActionRow from './ActionRow'
 import { useActions } from '../../state/actions/hooks'
+import { Token } from '../../state/tokens/types'
 
-export default function ActionList({ token, disabled }: { token: Currency; disabled?: boolean }) {
+const ActionList: React.FC<{ token: Token; disabled?: boolean }> = ({ token, disabled }) => {
   const actions = useActions(token)
 
   return (
     <div>
       {actions.map(action => (
-        <ActionRow key={action.id} action={action} currency={token} disabled={disabled} />
+        <ActionRow key={action.id} action={action} token={token} disabled={disabled} />
       ))}
     </div>
   )
 }
+
+export default ActionList

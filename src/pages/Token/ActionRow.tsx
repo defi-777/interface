@@ -1,5 +1,4 @@
 import React from 'react'
-import { Currency, Token, ETHER } from '@uniswap/sdk'
 import { Text } from 'rebass'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
@@ -9,6 +8,7 @@ import CurrencyLogo from '../../components/CurrencyLogo'
 import { FadedSpan, MenuItem } from '../../components/SearchModal/styleds'
 import { ChevronRight } from 'react-feather'
 import { Action } from '../../state/actions/types'
+import { Token } from '../../state/tokens/types'
 
 const MenuLink = styled(MenuItem)`
   text-decoration: none;
@@ -17,26 +17,19 @@ const MenuLink = styled(MenuItem)`
   height: 72px;
 `
 
-function currencyKey(currency: Currency): string {
-  return currency instanceof Token ? currency.address : currency === ETHER ? 'ETH' : ''
+interface ActionRowProps {
+  action: Action
+  token: Token
+  disabled?: boolean
 }
 
-export default function ActionRow({
-  action,
-  currency,
-  disabled
-}: {
-  action: Action
-  currency: Currency
-  disabled?: boolean
-}) {
-  const key = currencyKey(currency)
-  const path = action.path ? action.path.replace(':token', key) : `/action/${action.id}/${key}`
+const ActionRow: React.FC<ActionRowProps> = ({ action, token, disabled }) => {
+  const path = action.path ? action.path.replace(':token', token.address) : `/action/${action.id}/${token.address}`
   return (
     <MenuLink as={Link} to={path}>
-      <CurrencyLogo currency={currency} size={'24px'} />
+      <CurrencyLogo currency={token} size={'24px'} />
       <Column>
-        <Text title={currency.name} fontWeight={500}>
+        <Text title={action.name} fontWeight={500}>
           {action.name}
         </Text>
         <FadedSpan>{action.description}</FadedSpan>
@@ -49,3 +42,5 @@ export default function ActionRow({
     </MenuLink>
   )
 }
+
+export default ActionRow

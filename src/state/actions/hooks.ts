@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { Currency } from '@uniswap/sdk'
 import { Action } from './types'
 import { AppDispatch, AppState } from '../index'
 import { actionFetchStarted, actionFetchCompleted, actionFetchFailed } from './actions'
 import { useActiveWeb3React } from '../../hooks'
+import { Token } from '../tokens/types'
 
 async function fetchActions(network: string) {
   const request = await fetch(`https://defi777-api.vercel.app/api/${network}/actions.json`)
@@ -11,17 +11,15 @@ async function fetchActions(network: string) {
   return result.actions
 }
 
-function actionMatchesToken(action: Action, token: any): boolean {
-  if (!action.includeTag && !action.excludeTag) {
-    return true
+function actionMatchesToken(action: Action, token: Token): boolean {
+  if (action.includeType && action.includeType.indexOf(token.type) === -1) {
+    return false
+  }
+  if (action.includeProtocol && action.includeProtocol.indexOf(token.protocol) === -1) {
+    return false
   }
 
-  const tags = token.tokenInfo?.tags ?? []
-
-  const include = !action.includeTag || tags.indexOf(action.includeTag) !== -1
-  const exclude = !action.excludeTag || tags.indexOf(action.excludeTag) === -1
-
-  return include && exclude
+  return true
 }
 
 const chains: { [chainId: number]: string } = {
@@ -29,7 +27,7 @@ const chains: { [chainId: number]: string } = {
   42: 'kovan'
 }
 
-export function useActions(token: Currency): Action[] {
+export function useActions(token: Token): Action[] {
   const actions = useSelector<AppState, AppState['actions']>(state => state.actions)
   const dispatch = useDispatch<AppDispatch>()
   const { chainId } = useActiveWeb3React()

@@ -1,3 +1,5 @@
+import { TokenProtocol } from '../tokens/types'
+
 export interface Adapter {
   readonly address: string
   readonly name: string
@@ -10,8 +12,8 @@ export interface Action {
   readonly name: string
   readonly description: string
   readonly path?: string
-  readonly includeTag?: string
-  readonly excludeTag?: string
+  includeType?: string[]
+  includeProtocol?: TokenProtocol[]
   readonly adapters: Adapter[]
 }
 
