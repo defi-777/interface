@@ -15,7 +15,12 @@ const chains: { [chainId: number]: string } = {
   42: 'kovan'
 }
 
-export function useTokens({ yieldAdapter }: { yieldAdapter?: boolean } = {}): Token[] {
+interface TokenFilter {
+  yieldAdapter?: boolean
+  type?: string
+}
+
+export function useTokens({ yieldAdapter, type }: TokenFilter = {}): Token[] {
   const tokens = useSelector<AppState, AppState['tokens']>(state => state.tokens)
   const dispatch = useDispatch<AppDispatch>()
   const { chainId } = useActiveWeb3React()
@@ -32,8 +37,11 @@ export function useTokens({ yieldAdapter }: { yieldAdapter?: boolean } = {}): To
   return tokens.addresses
     .map((address: string) => tokens.byAddress[address]!)
     .filter((token: Token) => {
-      if (yieldAdapter !== undefined) {
-        return !!token.yieldAdapter === yieldAdapter
+      if (yieldAdapter !== undefined && !!token.yieldAdapter !== yieldAdapter) {
+        return false
+      }
+      if (type !== undefined && token.type !== type) {
+        return false
       }
       return true
     })
