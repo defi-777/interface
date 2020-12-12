@@ -5,6 +5,7 @@ import Logo from '../../components/Logo'
 import Unwrap from '../../assets/icons/unwrap'
 import aave from '../../assets/svg/aave-icon.svg'
 import balancer from '../../assets/svg/balancer-icon.svg'
+import compound from '../../assets/svg/compound-logo.svg'
 import curve from '../../assets/svg/curve-icon.svg'
 import uniswap from '../../assets/svg/uniswap-icon.svg'
 import yearn from '../../assets/svg/yearn-icon.svg'
@@ -26,6 +27,7 @@ const iconImages: { [id: string]: string } = {
   'aave-exit': aave,
   balancer,
   'balancer-pool': balancer,
+  compound,
   curve,
   uniswap,
   'uniswap-pool': uniswap,

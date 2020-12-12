@@ -10,9 +10,9 @@ import { Token } from '../../state/tokens/types'
 import { tokenToCurrency } from '../../state/tokens/utils'
 import Column from '../Column'
 import { RowFixed } from '../Row'
-import CurrencyLogo from '../CurrencyLogo'
 import { MenuItem } from '../SearchModal/styleds'
 import Loader from '../Loader'
+import TokenIcon from './TokenIcon'
 
 const StyledBalanceText = styled(Text)`
   white-space: nowrap;
@@ -52,7 +52,7 @@ const YieldWrapperRow: React.FC<{ address: string; parentToken: Token }> = ({ ad
 
   return (
     <MenuLink as={Link} to={`token/${token.address}`}>
-      <CurrencyLogo currency={currency} size={'20px'} />
+      <TokenIcon token={token} size={20} />
       <Column>
         <Text title={token.name} fontWeight={500}>
           {token.symbol}

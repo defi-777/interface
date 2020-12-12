@@ -9,9 +9,9 @@ import { Token } from '../../state/tokens/types'
 import { tokenToCurrency } from '../../state/tokens/utils'
 import Column from '../Column'
 import { RowFixed } from '../Row'
-import CurrencyLogo from '../CurrencyLogo'
 import { FadedSpan, MenuItem } from '../SearchModal/styleds'
 import Loader from '../Loader'
+import TokenIcon from './TokenIcon'
 
 const StyledBalanceText = styled(Text)`
   white-space: nowrap;
@@ -27,7 +27,7 @@ const MenuLink = styled(MenuItem)`
 `
 
 const Subtitle = styled(FadedSpan)`
-  color: ${({ theme }) => theme.text2}
+  color: ${({ theme }) => theme.text2};
 `
 
 function Balance({ balance }: { balance: CurrencyAmount }) {
@@ -55,10 +55,10 @@ const AssetRow: React.FC<{ token: Token }> = ({ token }) => {
 
   return (
     <MenuLink as={Link} to={`token/${token.address}`}>
-      <CurrencyLogo currency={currency} size={'24px'} />
+      <TokenIcon token={token} />
       <Column>
-        <Text title={currency.name} fontWeight={500}>
-          {currency.symbol}
+        <Text title={token.name} fontWeight={500}>
+          {token.symbol}
         </Text>
         <Subtitle>{subtitle}</Subtitle>
       </Column>
