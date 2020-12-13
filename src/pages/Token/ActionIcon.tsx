@@ -3,6 +3,7 @@ import { Package, Send } from 'react-feather'
 import { HelpCircle } from 'react-feather'
 import Logo from '../../components/Logo'
 import Unwrap from '../../assets/icons/unwrap'
+import Farm from '../../assets/icons/farm'
 import aave from '../../assets/svg/aave-icon.svg'
 import balancer from '../../assets/svg/balancer-icon.svg'
 import compound from '../../assets/svg/compound-logo.svg'
@@ -14,7 +15,8 @@ import styled from 'styled-components'
 const iconComponents: { [id: string]: ComponentType<any> } = {
   send: Send,
   unwrap: Unwrap,
-  wrap: Package
+  wrap: Package,
+  claim: Farm
 }
 
 const StyledLogo = styled(Logo)`
