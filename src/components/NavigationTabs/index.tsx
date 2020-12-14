@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import styled from 'styled-components'
 import { darken } from 'polished'
 import { useTranslation } from 'react-i18next'
@@ -102,7 +102,7 @@ export function AddRemoveTabs({ adding, creating }: { adding: boolean; creating:
 
 interface CardHeaderProps {
   back: string
-  title: string
+  title: string | ReactNode
   help?: string
 }
 

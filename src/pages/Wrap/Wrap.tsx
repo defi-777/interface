@@ -22,6 +22,7 @@ import useIsArgentWallet from '../../hooks/useIsArgentWallet'
 import { useApproveCallback, ApprovalState } from '../../hooks/useApproveCallback'
 import { useWrapperAddress } from '../../hooks/useWrapper'
 import { useTransactionAdder } from '../../state/transactions/hooks'
+import { CardHeader } from '../../components/NavigationTabs'
 
 const InputRow = styled.div`
   ${({ theme }) => theme.flexRowNoWrap}
@@ -153,7 +154,12 @@ export default function Wrap({
 
   return (
     <AppBody>
-      <div>From: {tokenIn ? tokenIn.name : currencyIdA}</div>
+      <CardHeader
+        back={`/token/${currencyIdA}`}
+        title={`Wrap ${tokenIn ? tokenIn.name : 'tokens'}`}
+        help="Wrapping ERC-20 tokens into DeFi777 tokens lets you easily use them in DeFi protocols"
+      />
+
       <Wrapper>
         {account && selectedCurrencyBalance && (
           <TYPE.body

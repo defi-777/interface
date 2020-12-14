@@ -15,6 +15,7 @@ import { tryParseAmount } from '../../state/swap/hooks'
 import { useCurrency } from '../../hooks/Tokens'
 import AddressInputPanel from '../../components/AddressInputPanel'
 import useENS from '../../hooks/useENS'
+import { CardHeader } from '../../components/NavigationTabs'
 
 const InputRow = styled.div`
   ${({ theme }) => theme.flexRowNoWrap}
@@ -83,7 +84,12 @@ const SendPage: React.FC<RouteComponentProps<{ token: string }>> = ({ match, his
 
   return (
     <AppBody>
-      <div>Send {currency.name}</div>
+      <CardHeader
+        back={`/token/${match.params.token}`}
+        title={`Send ${currency ? currency.name : 'tokens'}`}
+        help=" "
+      />
+
       <Wrapper>
         {account && selectedCurrencyBalance && (
           <TYPE.body

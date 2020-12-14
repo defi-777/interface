@@ -1,5 +1,4 @@
 import { Action, Adapter } from '../../state/actions/types'
-import { Currency } from '@uniswap/sdk'
 import React, { useState, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled, { ThemeContext } from 'styled-components'
@@ -15,6 +14,9 @@ import { ButtonPrimary } from '../../components/Button'
 import { useTransferCallback } from '../../hooks/useTransferCallback'
 import useENSName from '../../hooks/useENSName'
 import { tryParseAmount } from '../../state/swap/hooks'
+import { CardHeader } from '../../components/NavigationTabs'
+import { tokenToCurrency } from '../../state/tokens/utils'
+import { Token } from '../../state/tokens/types'
 
 const InputRow = styled.div`
   ${({ theme }) => theme.flexRowNoWrap}
@@ -49,12 +51,14 @@ const StyledBalanceMax = styled.button`
 interface AmountPageProps {
   action: Action
   adapter: Adapter
-  currency: Currency
+  token: Token
 }
 
-// const toHex = (currencyAmount: CurrencyAmount) => `0x${currencyAmount.raw.toString(16)}`
+const help =
+  'DeFi actions are executed by sending your tokens to a specific address. ' +
+  'You can send these tokens using this dapp, or from any other wallet.'
 
-const AmountPage: React.FC<AmountPageProps> = ({ action, adapter, currency }) => {
+const AmountPage: React.FC<AmountPageProps> = ({ action, adapter, token }) => {
   const theme = useContext(ThemeContext)
   const history = useHistory()
 
@@ -62,6 +66,7 @@ const AmountPage: React.FC<AmountPageProps> = ({ action, adapter, currency }) =>
   const [sending, setSending] = useState(false)
 
   const { account } = useActiveWeb3React()
+  const currency = tokenToCurrency(token)
   const selectedCurrencyBalance = useCurrencyBalance(account ?? undefined, currency ?? undefined)
 
   const tokenAmount = tryParseAmount(amount, currency)
@@ -85,8 +90,11 @@ const AmountPage: React.FC<AmountPageProps> = ({ action, adapter, currency }) =>
 
   return (
     <AppBody>
-      <div>Sending: {currency.name}</div>
-      <div>To: {ENSName || action.name}</div>
+      <CardHeader
+        back={action.adapters.length === 1 ? `/token/${token.address}` : `/action/${action.id}/${token.address}`}
+        title={`Sending ${token.name} to ${ENSName || action.name}`}
+        help={help}
+      />
       <Wrapper>
         {account && selectedCurrencyBalance && (
           <TYPE.body

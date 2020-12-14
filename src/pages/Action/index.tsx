@@ -3,7 +3,6 @@ import { RouteComponentProps, Redirect } from 'react-router-dom'
 import { Adapter } from '../../state/actions/types'
 import { useAction } from '../../state/actions/hooks'
 import { useToken } from '../../state/tokens/hooks'
-import { tokenToCurrency } from '../../state/tokens/utils'
 import AdapterSelectionPage from './AdapterSelectionPage'
 import AmountPage from './AmountPage'
 
@@ -16,7 +15,6 @@ interface ActionParams {
 const Action: React.FC<RouteComponentProps<ActionParams>> = ({ match }) => {
   const action = useAction(match.params.actionId)
   const token = useToken(match.params.currencyId)
-  const currency = token ? tokenToCurrency(token) : undefined
 
   if (!action) {
     return <div>Not found...</div>
@@ -41,7 +39,7 @@ const Action: React.FC<RouteComponentProps<ActionParams>> = ({ match }) => {
     return <AdapterSelectionPage action={action} token={token} />
   }
 
-  return <AmountPage action={action} adapter={adapter} currency={currency!} />
+  return <AmountPage action={action} adapter={adapter} token={token} />
 }
 
 export default Action
