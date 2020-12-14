@@ -59,7 +59,7 @@ export default function Pool() {
               </TYPE.mediumHeader>
             </HideSmall>
             <ButtonRow>
-              <ResponsiveButtonPrimary id="join-pool-button" as={Link} padding="6px 8px" to="/new-wrapper">
+              <ResponsiveButtonPrimary id="join-pool-button" as={Link} padding="6px 8px" to="/wrappers/new">
                 <Text fontWeight={500} fontSize={16}>
                   Create Wrapper
                 </Text>

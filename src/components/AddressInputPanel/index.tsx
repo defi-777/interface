@@ -65,17 +65,19 @@ const Input = styled.input<{ error?: boolean }>`
   }
 `
 
-export default function AddressInputPanel({
-  id,
-  value,
-  onChange
-}: {
-  id?: string
-  // the typed string value
+interface AddressInputPanelProps {
   value: string
-  // triggers whenever the typed value changes
   onChange: (value: string) => void
-}) {
+  label?: string
+  placeholder?: string
+}
+
+const AddressInputPanel: React.FC<AddressInputPanelProps> = ({
+  value,
+  onChange,
+  label = 'Recipient',
+  placeholder = 'Wallet Address or ENS name'
+}) => {
   const { chainId } = useActiveWeb3React()
   const theme = useContext(ThemeContext)
 
@@ -93,13 +95,13 @@ export default function AddressInputPanel({
   const error = Boolean(value.length > 0 && !loading && !address)
 
   return (
-    <InputPanel id={id}>
+    <InputPanel>
       <ContainerRow error={error}>
         <InputContainer>
           <AutoColumn gap="md">
             <RowBetween>
               <TYPE.black color={theme.text2} fontWeight={500} fontSize={14}>
-                Recipient
+                {label}
               </TYPE.black>
               {address && chainId && (
                 <ExternalLink href={getEtherscanLink(chainId, name ?? address, 'address')} style={{ fontSize: '14px' }}>
@@ -114,7 +116,7 @@ export default function AddressInputPanel({
               autoCorrect="off"
               autoCapitalize="off"
               spellCheck="false"
-              placeholder="Wallet Address or ENS name"
+              placeholder={placeholder}
               error={error}
               pattern="^(0x[a-fA-F0-9]{40})$"
               onChange={handleInput}
@@ -126,3 +128,5 @@ export default function AddressInputPanel({
     </InputPanel>
   )
 }
+
+export default AddressInputPanel

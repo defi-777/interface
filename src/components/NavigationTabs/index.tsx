@@ -99,3 +99,23 @@ export function AddRemoveTabs({ adding, creating }: { adding: boolean; creating:
     </Tabs>
   )
 }
+
+interface CardHeaderProps {
+  back: string
+  title: string
+  help?: string
+}
+
+export const CardHeader: React.FC<CardHeaderProps> = ({ back, title, help }) => {
+  return (
+    <Tabs>
+      <RowBetween style={{ padding: '1rem' }}>
+        <HistoryLink to={back}>
+          <StyledArrowLeft />
+        </HistoryLink>
+        <ActiveText>{title}</ActiveText>
+        {help && <QuestionHelper text={help} />}
+      </RowBetween>
+    </Tabs>
+  )
+}

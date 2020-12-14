@@ -11,7 +11,7 @@ import ENS_PUBLIC_RESOLVER_ABI from '../constants/abis/ens-public-resolver.json'
 import ENS_ABI from '../constants/abis/ens-registrar.json'
 import { ERC20_BYTES32_ABI } from '../constants/abis/erc20'
 import ERC20_ABI from '../constants/abis/erc20.json'
-import { MIGRATOR_ABI, MIGRATOR_ADDRESS } from '../constants/abis/migrator'
+import { WRAPPER_FACTORY_ABI, WRAPPER_FACTORY_ADDRESS } from '../constants/abis/wrapper-factory'
 import WETH_ABI from '../constants/abis/weth.json'
 import { MULTICALL_ABI, MULTICALL_NETWORKS } from '../constants/multicall'
 import { getContract } from '../utils'
@@ -32,8 +32,8 @@ function useContract(address: string | undefined, ABI: any, withSignerIfPossible
   }, [address, ABI, library, withSignerIfPossible, account])
 }
 
-export function useV2MigratorContract(): Contract | null {
-  return useContract(MIGRATOR_ADDRESS, MIGRATOR_ABI, true)
+export function useWrapperFactoryContract(): Contract | null {
+  return useContract(WRAPPER_FACTORY_ADDRESS, WRAPPER_FACTORY_ABI, true)
 }
 
 export function useAddressBookContract(): Contract | null {

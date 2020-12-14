@@ -1,9 +1,12 @@
 import { Currency, ETHER, Token, currencyEquals } from '@uniswap/sdk'
 import { useMemo } from 'react'
 import { useToken as useTokenNew, useTokens } from '../state/tokens/hooks'
+import { Token as NewToken } from '../state/tokens/types'
 import { tokenToCurrency } from '../state/tokens/utils'
 import { useUserAddedTokens } from '../state/user/hooks'
 import { isAddress } from '../utils'
+import { useTokenContract } from './useContract'
+import { NEVER_RELOAD, useSingleCallResult } from '../state/multicall/hooks'
 
 import { useActiveWeb3React } from './index'
 
@@ -55,4 +58,42 @@ export function useCurrency(currencyId: string | undefined): Currency | null | u
   const isETH = currencyId?.toUpperCase() === 'ETH'
   const token = useToken(isETH ? undefined : currencyId)
   return isETH ? ETHER : token
+}
+
+export function useAnyToken(tokenAddress?: string): NewToken | undefined | null {
+  const { chainId } = useActiveWeb3React()
+
+  const address = isAddress(tokenAddress)
+
+  const tokenContract = useTokenContract(address ? address : undefined, false)
+
+  const tokenName = useSingleCallResult(tokenContract, 'name', undefined, NEVER_RELOAD)
+  const symbol = useSingleCallResult(tokenContract, 'symbol', undefined, NEVER_RELOAD)
+  const decimals = useSingleCallResult(tokenContract, 'decimals', undefined, NEVER_RELOAD)
+
+  return useMemo(() => {
+    if (!chainId || !address) return undefined
+    if (decimals.loading || symbol.loading || tokenName.loading) return null
+    if (decimals.result) {
+      return {
+        type: 'erc20',
+        chainId: chainId.toString(),
+        protocol: null,
+        name: tokenName.result?.[0] || 'Unknown Token',
+        symbol: symbol.result?.[0] || 'UNKNOWN',
+        address,
+        decimals: decimals.result[0]
+      }
+    }
+    return undefined
+  }, [
+    address,
+    chainId,
+    decimals.loading,
+    decimals.result,
+    symbol.loading,
+    symbol.result,
+    tokenName.loading,
+    tokenName.result
+  ])
 }
