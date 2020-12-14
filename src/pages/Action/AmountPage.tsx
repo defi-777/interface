@@ -13,6 +13,7 @@ import { TYPE } from '../../theme'
 import { Input as NumericalInput } from '../../components/NumericalInput'
 import { ButtonPrimary } from '../../components/Button'
 import { useTransferCallback } from '../../hooks/useTransferCallback'
+import useENSName from '../../hooks/useENSName'
 import { tryParseAmount } from '../../state/swap/hooks'
 
 const InputRow = styled.div`
@@ -65,6 +66,7 @@ const AmountPage: React.FC<AmountPageProps> = ({ action, adapter, currency }) =>
 
   const tokenAmount = tryParseAmount(amount, currency)
   const { callback: transferCallback } = useTransferCallback(currency, tokenAmount, adapter.address)
+  const { ENSName } = useENSName(adapter.address)
 
   const send = async () => {
     if (!transferCallback) {
@@ -83,8 +85,8 @@ const AmountPage: React.FC<AmountPageProps> = ({ action, adapter, currency }) =>
 
   return (
     <AppBody>
-      <div>From: {currency.name}</div>
-      <div>To: {action.name}</div>
+      <div>Sending: {currency.name}</div>
+      <div>To: {ENSName || action.name}</div>
       <Wrapper>
         {account && selectedCurrencyBalance && (
           <TYPE.body
