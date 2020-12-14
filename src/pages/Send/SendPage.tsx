@@ -1,5 +1,5 @@
-import React, { useState, useContext } from 'react'
-import styled, { ThemeContext } from 'styled-components'
+import React, { useState } from 'react'
+import styled from 'styled-components'
 import { RouteComponentProps } from 'react-router-dom'
 import { Text } from 'rebass'
 import { AutoColumn } from '../../components/Column'
@@ -7,8 +7,7 @@ import AppBody from '../AppBody'
 import { useCurrencyBalance } from '../../state/wallet/hooks'
 import { useActiveWeb3React } from '../../hooks'
 import { Wrapper } from '../../components/swap/styleds'
-import { TYPE } from '../../theme'
-import { Input as NumericalInput } from '../../components/NumericalInput'
+import NumericalInputPanel from '../../components/NumericalInputPanel'
 import { ButtonPrimary } from '../../components/Button'
 import { useTransferCallback } from '../../hooks/useTransferCallback'
 import { tryParseAmount } from '../../state/swap/hooks'
@@ -23,33 +22,7 @@ const InputRow = styled.div`
   padding: '0.75rem 0.75rem 0.75rem 1rem';
 `
 
-const StyledBalanceMax = styled.button`
-  height: 28px;
-  background-color: ${({ theme }) => theme.primary5};
-  border: 1px solid ${({ theme }) => theme.primary5};
-  border-radius: 0.5rem;
-  font-size: 0.875rem;
-
-  font-weight: 500;
-  cursor: pointer;
-  margin-right: 0.5rem;
-  color: ${({ theme }) => theme.primaryText1};
-  :hover {
-    border: 1px solid ${({ theme }) => theme.primary1};
-  }
-  :focus {
-    border: 1px solid ${({ theme }) => theme.primary1};
-    outline: none;
-  }
-
-  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
-    margin-right: 0.5rem;
-  `};
-`
-
 const SendPage: React.FC<RouteComponentProps<{ token: string }>> = ({ match, history }) => {
-  const theme = useContext(ThemeContext)
-
   const currency = useCurrency(match.params.token)
 
   const [amount, setAmount] = useState('0')
@@ -91,26 +64,8 @@ const SendPage: React.FC<RouteComponentProps<{ token: string }>> = ({ match, his
       />
 
       <Wrapper>
-        {account && selectedCurrencyBalance && (
-          <TYPE.body
-            onClick={() => setAmount(selectedCurrencyBalance?.toSignificant(6))}
-            color={theme.text2}
-            fontWeight={500}
-            fontSize={14}
-            style={{ display: 'inline', cursor: 'pointer' }}
-          >
-            {!!currency && selectedCurrencyBalance ? 'Balance: ' + selectedCurrencyBalance?.toSignificant(6) : ' -'}
-          </TYPE.body>
-        )}
         <AutoColumn gap={'md'}>
-          <InputRow>
-            <NumericalInput className="token-amount-input" value={amount} onUserInput={val => setAmount(val)} />
-            {account && selectedCurrencyBalance && (
-              <StyledBalanceMax onClick={() => setAmount(selectedCurrencyBalance?.toSignificant(6))}>
-                MAX
-              </StyledBalanceMax>
-            )}
-          </InputRow>
+          <NumericalInputPanel max={selectedCurrencyBalance} value={amount} onChange={setAmount} />
 
           <InputRow>
             <AddressInputPanel value={recipient} onChange={setRecipient} />

@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { RouteComponentProps } from 'react-router-dom'
-import styled, { ThemeContext } from 'styled-components'
+import { ThemeContext } from 'styled-components'
 import { Text } from 'rebass'
 import { signDaiPermit, signERC2612Permit } from 'eth-permit'
 import { AutoColumn } from '../../components/Column'
@@ -12,7 +12,6 @@ import { PermitType, getPermitType } from '../../utils/permit'
 import { useCurrency } from '../../hooks/Tokens'
 import { Wrapper } from '../../components/swap/styleds'
 import { TYPE } from '../../theme'
-import { Input as NumericalInput } from '../../components/NumericalInput'
 import { tryParseAmount } from '../../state/swap/hooks'
 import { useAddressBookContract } from '../../hooks/useContract'
 import { ButtonError, ButtonConfirmed } from '../../components/Button'
@@ -23,36 +22,7 @@ import { useApproveCallback, ApprovalState } from '../../hooks/useApproveCallbac
 import { useWrapperAddress } from '../../hooks/useWrapper'
 import { useTransactionAdder } from '../../state/transactions/hooks'
 import { CardHeader } from '../../components/NavigationTabs'
-
-const InputRow = styled.div`
-  ${({ theme }) => theme.flexRowNoWrap}
-  align-items: center;
-  padding: '0.75rem 0.75rem 0.75rem 1rem';
-`
-
-const StyledBalanceMax = styled.button`
-  height: 28px;
-  background-color: ${({ theme }) => theme.primary5};
-  border: 1px solid ${({ theme }) => theme.primary5};
-  border-radius: 0.5rem;
-  font-size: 0.875rem;
-
-  font-weight: 500;
-  cursor: pointer;
-  margin-right: 0.5rem;
-  color: ${({ theme }) => theme.primaryText1};
-  :hover {
-    border: 1px solid ${({ theme }) => theme.primary1};
-  }
-  :focus {
-    border: 1px solid ${({ theme }) => theme.primary1};
-    outline: none;
-  }
-
-  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
-    margin-right: 0.5rem;
-  `};
-`
+import NumericalInputPanel from '../../components/NumericalInputPanel'
 
 interface SignatureData {
   v: number
@@ -161,26 +131,8 @@ export default function Wrap({
       />
 
       <Wrapper>
-        {account && selectedCurrencyBalance && (
-          <TYPE.body
-            onClick={() => setAmount(selectedCurrencyBalance?.toSignificant(6))}
-            color={theme.text2}
-            fontWeight={500}
-            fontSize={14}
-            style={{ display: 'inline', cursor: 'pointer' }}
-          >
-            {!!tokenIn && selectedCurrencyBalance ? 'Balance: ' + selectedCurrencyBalance?.toSignificant(6) : ' -'}
-          </TYPE.body>
-        )}
         <AutoColumn gap={'md'}>
-          <InputRow>
-            <NumericalInput className="token-amount-input" value={amount} onUserInput={val => setAmount(val)} />
-            {account && selectedCurrencyBalance && (
-              <StyledBalanceMax onClick={() => setAmount(selectedCurrencyBalance?.toSignificant(6))}>
-                MAX
-              </StyledBalanceMax>
-            )}
-          </InputRow>
+          <NumericalInputPanel max={selectedCurrencyBalance} value={amount} onChange={setAmount} />
 
           <RowBetween>
             <ButtonConfirmed
