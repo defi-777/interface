@@ -36,8 +36,13 @@ const YieldOverlay = styled(Overlay)`
   }
 `
 
-const TokenIcon: React.FC<{ token: Token; size?: number }> = ({ token, size }) => {
-  const underlyingToken = useToken(token.underlyingAddress)
+const TokenIcon: React.FC<{ token?: Token; size?: number }> = ({ token, size }) => {
+  const underlyingToken = useToken(token?.underlyingAddress)
+
+  if (!token) {
+    // TODO: question mark
+    return null
+  }
 
   if (token.type === 'erc777' && underlyingToken) {
     const currency = tokenToCurrency(underlyingToken)
