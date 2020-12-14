@@ -8,6 +8,7 @@ import Popups from '../components/Popups'
 import Web3ReactManager from '../components/Web3ReactManager'
 import DarkModeQueryParamReader from '../theme/DarkModeQueryParamReader'
 import Action from './Action'
+import Adapters from './Adapters'
 import Claim from './Claim'
 import Wallet from './Wallet'
 import Token from './Token'
@@ -74,6 +75,7 @@ export default function App() {
               <Route path="/claim/:adapterAddress" component={Claim} />
               <Route path="/send/:token" component={SendPage} />
               <Route path="/sent/:txHash" component={SentPage} />
+              <Route path="/adapters" component={Adapters} />
               <Route path="/wrappers/new" component={NewWrapper} />
               <Route exact strict path="/wrappers" component={Wrappers} />
               <Redirect to="/wallet" />
