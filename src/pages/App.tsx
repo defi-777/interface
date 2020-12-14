@@ -12,6 +12,7 @@ import Claim from './Claim'
 import Wallet from './Wallet'
 import Token from './Token'
 import Wrap from './Wrap'
+import Wrappers from './Wrappers'
 import SendPage from './Send'
 import SentPage from './Sent'
 
@@ -72,6 +73,7 @@ export default function App() {
               <Route path="/claim/:adapterAddress" component={Claim} />
               <Route path="/send/:token" component={SendPage} />
               <Route path="/sent/:txHash" component={SentPage} />
+              <Route path="/wrappers" component={Wrappers} />
               <Redirect to="/wallet" />
             </Switch>
           </Web3ReactManager>

@@ -36,7 +36,13 @@ const YieldOverlay = styled(Overlay)`
   }
 `
 
-const TokenIcon: React.FC<{ token?: Token; size?: number }> = ({ token, size }) => {
+interface TokenIconProps {
+  token?: Token
+  size?: number
+  style?: any
+}
+
+const TokenIcon: React.FC<TokenIconProps> = ({ token, size, style }) => {
   const underlyingToken = useToken(token?.underlyingAddress)
 
   if (!token) {
@@ -47,7 +53,7 @@ const TokenIcon: React.FC<{ token?: Token; size?: number }> = ({ token, size }) 
   if (token.type === 'erc777' && underlyingToken) {
     const currency = tokenToCurrency(underlyingToken)
     return (
-      <WrapperOverlay>
+      <WrapperOverlay style={style}>
         <CurrencyLogo currency={currency} size={`${size}px`} />
       </WrapperOverlay>
     )
@@ -56,14 +62,14 @@ const TokenIcon: React.FC<{ token?: Token; size?: number }> = ({ token, size }) 
   if (token.type === 'yield' && underlyingToken) {
     const currency = tokenToCurrency(underlyingToken)
     return (
-      <YieldOverlay>
+      <YieldOverlay style={style}>
         <CurrencyLogo currency={currency} size={`${size}px`} />
       </YieldOverlay>
     )
   }
 
   const currency = tokenToCurrency(token)
-  return <CurrencyLogo currency={currency} size={`${size}px`} />
+  return <CurrencyLogo currency={currency} size={`${size}px`} style={style} />
 }
 
 TokenIcon.defaultProps = {
