@@ -30,7 +30,9 @@ const iconImages: { [id: string]: string } = {
   balancer,
   'balancer-pool': balancer,
   compound,
+  'compound-exit': compound,
   curve,
+  'curve-exit': curve,
   uniswap,
   'uniswap-pool': uniswap,
   yearn
