@@ -6,7 +6,7 @@ import { Wrapper } from '../../components/swap/styleds'
 import AppBody from '../AppBody'
 import AssetList from '../../components/AssetList'
 
-export default function Swap() {
+const Wallet: React.FC = () => {
   return (
     <AppBody>
       <SwapPoolTabs active={'swap'} />
@@ -18,3 +18,5 @@ export default function Swap() {
     </AppBody>
   )
 }
+
+export default Wallet

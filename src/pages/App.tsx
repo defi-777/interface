@@ -9,7 +9,7 @@ import Web3ReactManager from '../components/Web3ReactManager'
 import DarkModeQueryParamReader from '../theme/DarkModeQueryParamReader'
 import Action from './Action'
 import Claim from './Claim'
-import Swap from './Swap'
+import Wallet from './Wallet'
 import Token from './Token'
 import Wrap from './Wrap'
 import SendPage from './Send'
@@ -65,14 +65,14 @@ export default function App() {
           <Polling />
           <Web3ReactManager>
             <Switch>
-              <Route exact strict path="/swap" component={Swap} />
+              <Route exact strict path="/wallet" component={Wallet} />
               <Route exact strict path="/token/:address" component={Token} />
               <Route path="/action/:actionId/:currencyId/:adapter?" component={Action} />
               <Route path="/wrap/:currencyIdA" component={Wrap} />
               <Route path="/claim/:adapterAddress" component={Claim} />
               <Route path="/send/:token" component={SendPage} />
               <Route path="/sent/:txHash" component={SentPage} />
-              <Redirect to="/swap" />
+              <Redirect to="/wallet" />
             </Switch>
           </Web3ReactManager>
           <Marginer />
