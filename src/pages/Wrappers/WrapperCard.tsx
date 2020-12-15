@@ -82,7 +82,7 @@ const WrapperCard: React.FC<{ token: Token }> = ({ token }) => {
           <AutoColumn gap="8px">
             <FixedHeightRow>
               <Text fontSize={16} fontWeight={500}>
-                Token Address:
+                DeFi777 Token Address:
               </Text>
               <Text fontSize={16} fontWeight={500}>
                 <ExternalLink href={getEtherscanLink(chainId || 1, token.address, 'address')}>
@@ -93,7 +93,7 @@ const WrapperCard: React.FC<{ token: Token }> = ({ token }) => {
             <FixedHeightRow>
               <RowFixed>
                 <Text fontSize={16} fontWeight={500}>
-                  Wrapped Token Address:
+                  Underlying Token Address:
                 </Text>
               </RowFixed>
               <RowFixed>
