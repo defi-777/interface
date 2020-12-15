@@ -1,6 +1,5 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import { RouteComponentProps } from 'react-router-dom'
-import { ThemeContext } from 'styled-components'
 import { Text } from 'rebass'
 import { signDaiPermit, signERC2612Permit } from 'eth-permit'
 import { AutoColumn } from '../../components/Column'
@@ -11,7 +10,6 @@ import { toHex, getWrapperContract } from '../../utils'
 import { PermitType, getPermitType } from '../../utils/permit'
 import { useCurrency } from '../../hooks/Tokens'
 import { Wrapper } from '../../components/swap/styleds'
-import { TYPE } from '../../theme'
 import { tryParseAmount } from '../../state/swap/hooks'
 import { useAddressBookContract } from '../../hooks/useContract'
 import { ButtonError, ButtonConfirmed } from '../../components/Button'
@@ -39,7 +37,6 @@ export default function Wrap({
   history
 }: RouteComponentProps<{ currencyIdA: string }>) {
   const tokenIn = useCurrency(currencyIdA)
-  const theme = useContext(ThemeContext)
 
   const [amount, _setAmount] = useState('0')
   const [wrapping, setWrapping] = useState(false)
