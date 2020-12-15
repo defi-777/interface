@@ -30,7 +30,7 @@ const chains: { [chainId: number]: string } = {
   42: 'kovan'
 }
 
-export function useActions(token: Token): Action[] {
+export function useActions(token?: Token): Action[] {
   const actions = useSelector<AppState, AppState['actions']>(state => state.actions)
   const dispatch = useDispatch<AppDispatch>()
   const { chainId } = useActiveWeb3React()
@@ -44,10 +44,11 @@ export function useActions(token: Token): Action[] {
         dispatch(actionFetchFailed())
       })
   }
-  return actions.actionIds
-    .map((id: string) => actions.byId[id]!)
-    .filter((action: Action) => actionMatchesToken(action, token))
-    .sort((a: Action, b: Action) => (b.sort || 0) - (a.sort || 0))
+  let actionList = actions.actionIds.map((id: string) => actions.byId[id]!)
+  if (token) {
+    actionList = actionList.filter((action: Action) => actionMatchesToken(action, token))
+  }
+  return actionList.sort((a: Action, b: Action) => (b.sort || 0) - (a.sort || 0))
 }
 
 export function useAction(id: string): Action | null {

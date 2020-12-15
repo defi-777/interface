@@ -28,14 +28,15 @@ const iconImages: { [id: string]: string } = {
   aave,
   'aave-exit': aave,
   balancer,
-  'balancer-pool': balancer,
+  'balancer-exit': balancer,
   compound,
   'compound-exit': compound,
   curve,
   'curve-exit': curve,
   uniswap,
   'uniswap-pool': uniswap,
-  yearn
+  yearn,
+  'yearn-exit': yearn
 }
 
 const ActionIcon: React.FC<{ id: string }> = ({ id }) => {
