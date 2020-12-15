@@ -20,7 +20,7 @@ export function useTransferCallback(
 
   const addTransaction = useTransactionAdder()
 
-  const { address: recipientAddress } = useENS(recipientAddressOrName)
+  const { address: recipientAddress, name } = useENS(recipientAddressOrName)
   const recipient = recipientAddressOrName === null ? account : recipientAddress
 
   return useMemo(() => {
@@ -56,7 +56,7 @@ export function useTransferCallback(
           .then((response: any) => {
             const inputSymbol = token.symbol
 
-            const summary = `Transfer ${amount.toFixed(2)} ${inputSymbol} to ${recipientAddressOrName}`
+            const summary = `Send ${amount.toFixed(2)} ${inputSymbol} to ${name || recipientAddressOrName}`
 
             addTransaction(response, { summary })
 
@@ -75,5 +75,5 @@ export function useTransferCallback(
       },
       error: null
     }
-  }, [amount, token, library, account, chainId, recipient, recipientAddressOrName, addTransaction])
+  }, [amount, token, library, account, chainId, recipient, recipientAddressOrName, name, addTransaction])
 }
