@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { BookOpen, Code, Info, MessageCircle } from 'react-feather'
+import { /*BookOpen,*/ Code, /*Info,*/ MessageCircle } from 'react-feather'
 import styled from 'styled-components'
 import { ReactComponent as MenuIcon } from '../../assets/images/menu.svg'
 import { useOnClickOutside } from '../../hooks/useOnClickOutside'
@@ -100,14 +100,14 @@ export default function Menu() {
 
       {open && (
         <MenuFlyout>
-          <MenuItem id="link" href="https://uniswap.org/">
+          {/*<MenuItem id="link" href="https://uniswap.org/">
             <Info size={14} />
             About
           </MenuItem>
           <MenuItem id="link" href="https://uniswap.org/docs/v2">
             <BookOpen size={14} />
             Docs
-          </MenuItem>
+          </MenuItem>*/}
           <MenuItem id="link" href={CODE_LINK}>
             <Code size={14} />
             Code
