@@ -27,7 +27,7 @@ const Wallet: React.FC = () => {
               <Text>Connect to your wallet to view use DeFi777</Text>
               <ButtonPrimary onClick={toggleWalletModal}>Connect Wallet</ButtonPrimary>
               <RowBetween marginTop="10px">
-                <ButtonLight padding="8px" borderRadius="8px" as={Link} to="/wrappers" width="48%" >
+                <ButtonLight padding="8px" borderRadius="8px" as={Link} to="/wrappers" width="48%">
                   View DeFi777 Wrappers
                 </ButtonLight>
                 <ButtonLight padding="8px" borderRadius="8px" as={Link} width="48%" to="/adapters">
