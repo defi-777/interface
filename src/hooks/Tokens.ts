@@ -1,9 +1,8 @@
-import { Currency, ETHER, Token, currencyEquals } from '@uniswap/sdk'
+import { Currency, ETHER, Token } from '@uniswap/sdk'
 import { useMemo } from 'react'
 import { useToken as useTokenNew, useTokens } from '../state/tokens/hooks'
 import { Token as NewToken } from '../state/tokens/types'
 import { tokenToCurrency } from '../state/tokens/utils'
-import { useUserAddedTokens } from '../state/user/hooks'
 import { isAddress } from '../utils'
 import { useTokenContract } from './useContract'
 import { NEVER_RELOAD, useSingleCallResult } from '../state/multicall/hooks'
@@ -33,9 +32,8 @@ export function useAllTokens(): { [address: string]: Token } {
 }
 
 // Check if currency is included in custom list from user storage
-export function useIsUserAddedToken(currency: Currency): boolean {
-  const userAddedTokens = useUserAddedTokens()
-  return !!userAddedTokens.find(token => currencyEquals(currency, token))
+export function useIsUserAddedToken(): boolean {
+  return false
 }
 
 // undefined if invalid or does not exist

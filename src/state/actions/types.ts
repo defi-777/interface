@@ -12,9 +12,12 @@ export interface Action {
   readonly name: string
   readonly description: string
   readonly path?: string
-  includeType?: string[]
-  includeProtocol?: TokenProtocol[]
-  includeUnderlying?: string[]
+  readonly factory?: {
+    readonly address: string
+  }
+  readonly includeType?: string[]
+  readonly includeProtocol?: TokenProtocol[]
+  readonly includeUnderlying?: string[]
   readonly adapters: Adapter[]
   readonly sort?: number
 }

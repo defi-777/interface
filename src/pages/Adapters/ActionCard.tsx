@@ -3,7 +3,8 @@ import React, { useState } from 'react'
 import { ChevronDown, ChevronUp } from 'react-feather'
 import { Text } from 'rebass'
 import styled from 'styled-components'
-import { ButtonEmpty } from '../../components/Button'
+import { Link } from 'react-router-dom'
+import { ButtonEmpty, ButtonPrimary } from '../../components/Button'
 import Card, { LightCard } from '../../components/Card'
 import { AutoColumn } from '../../components/Column'
 import { RowBetween, RowFixed } from '../../components/Row'
@@ -75,6 +76,11 @@ const ActionCard: React.FC<{ action: Action }> = ({ action }) => {
               action.adapters.map((adapter: Adapter) => (
                 <AdapterRow key={adapter.address} adapter={adapter} label={adapter.name} />
               ))
+            )}
+            {action.factory && (
+              <ButtonPrimary padding="8px" borderRadius="8px" as={Link} to={`/adapters/new/${action.id}`}>
+                Create New Adapter
+              </ButtonPrimary>
             )}
           </AutoColumn>
         )}

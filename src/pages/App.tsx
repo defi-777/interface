@@ -13,6 +13,7 @@ import Claim from './Claim'
 import Wallet from './Wallet'
 import Token from './Token'
 import Wrap from './Wrap'
+import NewAdapter from './NewAdapter'
 import NewWrapper from './NewWrapper'
 import Wrappers from './Wrappers'
 import SendPage from './Send'
@@ -75,6 +76,7 @@ export default function App() {
               <Route path="/claim/:adapterAddress" component={Claim} />
               <Route path="/send/:token" component={SendPage} />
               <Route path="/sent/:txHash" component={SentPage} />
+              <Route path="/adapters/new/:actionId" component={NewAdapter} />
               <Route path="/adapters" component={Adapters} />
               <Route path="/wrappers/new" component={NewWrapper} />
               <Route exact strict path="/wrappers" component={Wrappers} />
