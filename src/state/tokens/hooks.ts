@@ -12,6 +12,8 @@ async function fetchTokens(network: string) {
 
 const chains: { [chainId: number]: string } = {
   1: 'mainnet',
+  4: 'rinkeby',
+  5: 'goerli',
   42: 'kovan'
 }
 
